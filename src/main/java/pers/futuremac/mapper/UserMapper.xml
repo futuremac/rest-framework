@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pers.futuremac.mapper.UserMapper">
+    <resultMap id="userResultMap" type="pers.futuremac.domain.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="phone" property="phone" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="column_list">
+        id,phone,name
+    </sql>
+
+    <select id="getUser" parameterType="string" resultMap="userResultMap" timeout="1">
+        SELECT
+        <include refid="column_list" />
+         FROM user
+        WHERE id = #{id};
+    </select>
+</mapper>
