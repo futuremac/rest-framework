@@ -4,9 +4,10 @@ package pers.futuremac.controller;
  * Created by 前程 on 2015/7/13.
  */
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.glassfish.jersey.server.mvc.Template;
+import org.glassfish.jersey.server.mvc.Viewable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.*;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 @Component
 @Path("/")
@@ -92,6 +91,12 @@ public class ServiceController {
             logger.error(e.getMessage());
             return Response.status(200).entity("").build();
         }
+    }
+
+    @GET
+    @Path("/rest/test")
+    public Response generateQRCode(){
+        return Response.ok(new Viewable("/test.jsp", null)).build();
     }
 
     private void saveFile(InputStream uploadInputStream,String dir){
